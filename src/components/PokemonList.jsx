@@ -2,10 +2,11 @@ import "./PokemonList.css";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = ({ pokemons }) => {
+  console.log(pokemons);
   return (
     <div className="PokemonList">
-      {pokemons.map((pokemons) => (
-        <PokemonCard />
+      {pokemons.map((pokemon) => (
+        <PokemonCard key={pokemons.name} name={pokemon.name} />
       ))}
     </div>
   );
