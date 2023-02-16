@@ -9,7 +9,7 @@ import PokemonList from "./components/PokemonList";
 
 import pokedux from "./assets/pokedux.svg";
 import { fetchPokemons } from "./api";
-import { setPokemons } from "./actions";
+import { getPokemonsWithDetails } from "./actions";
 
 function App() {
   const pokemons = useSelector((state) => state.pokemons);
@@ -18,7 +18,8 @@ function App() {
   useEffect(() => {
     const getPokemons = async () => {
       const results = await fetchPokemons();
-      dispatch(setPokemons(results));
+
+      dispatch(getPokemonsWithDetails(results));
     };
 
     getPokemons();
