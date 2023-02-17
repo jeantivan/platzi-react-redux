@@ -10,10 +10,12 @@ import PokemonList from "./components/PokemonList";
 import pokedux from "./assets/pokedux.svg";
 import { fetchPokemons } from "./api";
 import { getPokemonsWithDetails } from "./actions";
+import Skeletons from "./components/Skeletons";
 
 function App() {
-  const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
+  const pokemons = useSelector((state) => state.pokemons);
+  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
     const getPokemons = async () => {
@@ -38,7 +40,8 @@ function App() {
           <Searcher />
         </Col>
       </Row>
-      <PokemonList pokemons={pokemons} />
+
+      {loading ? <Skeletons /> : <PokemonList pokemons={pokemons} />}
     </div>
   );
 }
