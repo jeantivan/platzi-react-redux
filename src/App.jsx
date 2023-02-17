@@ -3,7 +3,7 @@ import "./App.css";
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Col } from "antd";
+import { Row, Col } from "antd";
 import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
 
@@ -27,12 +27,17 @@ function App() {
 
   return (
     <div className="App">
-      <Col span={4} offset={10}>
-        <img src={pokedux} alt="Pokedux" />
-      </Col>
-      <Col span={8} offset={8}>
-        <Searcher />
-      </Col>
+      <Row justify="center" style={{ margin: "3rem" }}>
+        <Col xs={24} md={12}>
+          <img src={pokedux} alt="Pokedux" />
+        </Col>
+      </Row>
+
+      <Row justify="center" style={{ margin: "3rem" }}>
+        <Col flex="auto" md={12} lg={14}>
+          <Searcher />
+        </Col>
+      </Row>
       <PokemonList pokemons={pokemons} />
     </div>
   );
