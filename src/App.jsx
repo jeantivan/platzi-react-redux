@@ -2,7 +2,7 @@ import "antd/dist/reset.css";
 import "./App.css";
 
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Row, Col } from "antd";
 import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
@@ -14,8 +14,10 @@ import Skeletons from "./components/Skeletons";
 
 function App() {
   const dispatch = useDispatch();
-  const pokemons = useSelector((state) => state.get("pokemons").toJS());
-  const loading = useSelector((state) => state.get("loading"));
+  const pokemons = useSelector((state) =>
+    state.getIn(["data", "pokemons"], shallowEqual).toJS()
+  );
+  const loading = useSelector((state) => state.getIn(["ui", "loading"]));
 
   useEffect(() => {
     const getPokemons = async () => {
