@@ -8,25 +8,16 @@ import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
 
 import pokedux from "./assets/pokedux.svg";
-import { fetchPokemons } from "./api";
-import { getPokemonsWithDetails } from "./actions";
+import { getPokemonsWithDetails } from "./slices/dataSlice";
 import Skeletons from "./components/Skeletons";
 
 function App() {
   const dispatch = useDispatch();
-  const pokemons = useSelector((state) =>
-    state.getIn(["data", "pokemons"], shallowEqual).toJS()
-  );
-  const loading = useSelector((state) => state.getIn(["ui", "loading"]));
+  const pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
+  const loading = useSelector((state) => state.ui.loading);
 
   useEffect(() => {
-    const getPokemons = async () => {
-      const results = await fetchPokemons();
-
-      dispatch(getPokemonsWithDetails(results));
-    };
-
-    getPokemons();
+    dispatch(getPokemonsWithDetails());
   }, []);
 
   return (
